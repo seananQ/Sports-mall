@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>运动商城</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+    <style>
+        .navbar-right {
+            float: right !important;
+            margin-right: 5px;
+        }
+
+        .navbar-text {
+            margin-right: 10px;
+        }
+
+        /*angular动画样式 - 淡入的过程
+            .ng-enter   .ng-enter-active
+            .ng-leave   .ng-leave-active
+        */
+        .ngFadeIn.ng-enter { opacity: 0; transition: 0.5s ease-in-out opacity;}
+        .ngFadeIn.ng-enter-active { opacity: 1; }
+
+        /*angular动画-滑入滑出*/
+        .ngViewContainer {
+            position: absolute;
+            width: 100%;
+            display: block;
+        }
+
+        .ngViewContainer.ng-enter,
+        .ngViewContainer.ng-leave {
+            -webkit-transition: 600ms linear all;
+            transition: 600ms linear all;
+        }
+
+        .ngViewContainer.ng-enter {
+            transform: translateX(1000px);
+        }
+
+        .ngViewContainer.ng-enter-active {
+            transform: translateX(0px);
+        }
+
+        .ngViewContainer.ng-leave {
+            transform: translateX(0px);
+        }
+
+        .ngViewContainer.ng-leave-active {
+            transform: translateX(-2000px);
+        }
+    </style>
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-route.js"></script>
+    <script src="lib/angular-animate.js"></script>
+    <script>
+        // 创建主模块
+        var myapp = angular.module("myapp", ["ngRoute","ngAnimate","myFilter","myCart","checkout"]);
+        // 配置路由
+        myapp.config(function($routeProvider){
+            $routeProvider.when("/product",{templateUrl:"views/productList.html"});
+            $routeProvider.when("/checkout",{templateUrl:"views/checkoutSummary.html"});
+            $routeProvider.when("/placeOrder",{templateUrl:"views/placeOrder.html"});
+            $routeProvider.when("/complete",{templateUrl:"views/thankYou.html"});
+            $routeProvider.otherwise({templateUrl:"views/productList.html"});
+        });
+    </script>
+    <script src="controllers/sportsStore.js"></script>
+    <script src="controllers/productList.js"></script>
+    <script src="controllers/mycart.js"></script>
+    <script src="controllers/checkout.js"></script>
+    <script src="filters/myFilters.js"></script>
+</head>
+<body ng-controller="sportsStoreCtrl">
+<h1>运动商城</h1>
+<div class="navbar navbar-inverse" ng-controller="cartController">
+    <a class="navbar-brand" href="#">运动商城</a>
+    <div class="navbar-right">
+        <div class="navbar-text">
+            <b>您的购物车:</b>
+            {{countTotal()}}个商品, 总金额:{{moneyTotal() | currency:"￥"}}
+        </div>
+        <a class="btn btn-default navbar-btn" href="#checkout">结账</a>
+    </div>
+</div>
+
+<!--将productListCtrl控制器放在sportsStoreCtrl控制器内意味着我们要利用controller scope继承-->
+<!--<div ng-view class="ngFadeIn"></div>-->
+<div ng-view class="ngViewContainer"></div>
+</body>
+</html>

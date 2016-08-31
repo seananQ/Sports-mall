@@ -1,0 +1,30 @@
+ [
+  {
+    "name": "Product #1",
+    "description": "A product",
+    "category": "Category #1",
+    "price": 100,
+    "imgurl": "images/TB1_50x50.jpg"
+  },
+  {
+    "name": "Product #2",
+    "description": "A product",
+    "category": "Category #1",
+    "price": 110,
+    "imgurl": "images/TB2_50x50.jpg"
+  },
+  {
+    "name": "Product #3",
+    "description": "A product",
+    "category": "Category #2",
+    "price": 210,
+    "imgurl": "images/TB3_50x50.jpg"
+  },
+  {
+    "name": "Product #4",
+    "description": "A product",
+    "category": "Category #3",
+    "price": 202,
+    "imgurl": "images/TB4_50x50.jpg"
+  }
+]
